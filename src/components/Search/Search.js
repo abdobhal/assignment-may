@@ -16,9 +16,9 @@ const Search = (props) => {
 
 	useEffect (()=>{
 		if(!(sessionStorage.isLoggedIn === "true")) {
-			props.history.push('/');	
+			props.history.push('/');
 		}
-	},[]);
+	},[props]);
 
 	const debouncedFn = useRef(
 	  	_.debounce(async (e) => {
