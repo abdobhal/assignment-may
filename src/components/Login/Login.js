@@ -1,44 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Login.css";
+import { connect } from 'react-redux';
 
 const Login = (props) => {
-    const [userDetails, setUser] = useState({user: {username: null, password: null}});
-    const [loginErrorStatus, setLoginErrStatus] = useState({loginError: false});
-
-    const handleUsername = (event) => {
-        setUser({
-            user:{
-                password: userDetails.user.password,
-                username:  event.target.value
-            }
-        })
-
-    }
-
-    const handlePassword = (event) =>{
-        setUser({
-            user:{
-                username: userDetails.user.username,
-                password: event.target.value
-            }
-        })
-    }
+    const [loginErrorStatus, setLoginErrStatus] = useState(false);
 
     const loginClickHandler = async event => {
         event.preventDefault();
         try {
-            if(userDetails.user.username.trim().length && userDetails.user.password.trim().length){
+            if(props.userNameFromStore.trim().length && props.pwdFromStore.trim().length){
                 const userData = await login();
 
-                    if (userData) {
+                if (userData) {
                     console.log("Logged in");
                     sessionStorage.isLoggedIn = true;
                     props.history.push('/search');
-                    }
-                    else{
-                    setLoginErrStatus({
-                        loginError: true
-                    })
+                }
+                else{
+                    setLoginErrStatus(true);
                 }
             }
         } catch(err) {
@@ -53,7 +32,7 @@ const Login = (props) => {
             .then((data)=>{
                 if(data){
                     userData = data.results.find(user => {
-                        return user.name.toLowerCase() === userDetails.user.username.toLowerCase() && user.birth_year === userDetails.user.password
+                        return user.name.toLowerCase() === props.userNameFromStore.toLowerCase() && user.birth_year === props.pwdFromStore
                     });
 
                     if(userData){
@@ -77,13 +56,13 @@ const Login = (props) => {
                 <h1>Sign In</h1>
                 <div className="login-email">
                     <label htmlFor="username" className="placeholder"> Enter Star Wars Character name</label>
-                    <input type="text" required onChange={handleUsername} id="username" placeholder="Username"  className="form-control" />
+                    <input type="text" required onChange={(event) => props.handleUsername(event)} id="username" placeholder="Username"  className="form-control" />
                 </div>
                 <div className="login-pwd">
                     <label htmlFor="password" className="placeholder">Enter Password - YOB</label>
-                    <input type="password" required onChange={handlePassword} id="password" placeholder="Password" className="form-control" />
+                    <input type="password" required onChange={(event) => props.handlePassword(event)} id="password" placeholder="Password" className="form-control" />
                     {
-                        loginErrorStatus.loginError ? <p className="error">Login Failed, Please try again !!</p> : null                        
+                        loginErrorStatus ? <p className="error">Login Failed, Please try again !!</p> : null                        
                     }
                 </div>
                 <div className="submit-btn">
@@ -95,4 +74,18 @@ const Login = (props) => {
     
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        userNameFromStore: state.userName,
+        pwdFromStore: state.password  
+    } 
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleUsername: (event) => dispatch({type: 'USERNAME', event}),
+        handlePassword: (event) => dispatch({type: 'PASSWORD', event})
+    }  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

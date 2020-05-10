@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import "./Search.css";
 import _ from 'lodash';
+import { connect } from 'react-redux';
 
 const Search = (props) => {
 
@@ -86,6 +87,7 @@ const Search = (props) => {
 
 		<div className="container search-page">
 			<h1>Search page</h1>
+			<h4>Logged in as: {props.userNameFromStore}</h4>
 			<a href="/#" className="logout-control" onClick={logoutClickHandler}>Logout</a>
 			<input type="text" className="form-control" placeholder="Search planets here..." onChange={handleSearch} />
 			
@@ -101,4 +103,10 @@ const Search = (props) => {
 
 }
 
-export default Search;
+const mapStateToProp = (state) => {
+	return {
+		userNameFromStore : state.userName
+	}
+}
+
+export default connect(mapStateToProp)(Search);
