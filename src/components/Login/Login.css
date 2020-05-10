@@ -1,0 +1,28 @@
+.container {
+  width: 33%;
+  margin: 100px auto;
+  box-sizing: content-box;
+  background: #fff;
+  padding: 40px;
+}
+
+.error {
+	color: red;
+	text-align: center;
+}
+
+.submit-btn {
+	text-align: center;
+}
+
+.submit-btn button{
+	border-radius: 10px;
+	color: white;
+	background-color: #1f313a;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.submit-btn button:hover{
+	background-color: #ed1385
+}

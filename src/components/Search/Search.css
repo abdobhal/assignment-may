@@ -1,0 +1,56 @@
+.search-page {
+	text-align: center;
+	width: 50%;
+	position: relative;
+}
+
+.search-page h1{
+	font-size: 26px;
+	font-weight: 400;
+	text-align: left;
+}
+
+.planets-list {
+	padding: 0;
+	margin-bottom: 40px;
+	max-height: 410px;
+	overflow: auto;
+}
+
+.planets-list .form-control {
+	margin-top: 40px;
+}
+
+.search-page .logout-control{
+	position: absolute;
+	top: 50px;
+	right: 40px;
+}
+
+.planets-list li {
+	cursor: pointer;
+	list-style: none;
+	width: 284px;
+	padding: 10px 10px 20px 10px;
+	border: 1px solid #BFBFBF;
+	background-color: white;
+	box-shadow: 10px 10px 5px #aaaaaa;
+	margin: 10px;
+	display: inline-block;
+}
+
+.planets-list li h6.light {
+	color: #FFA500;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.planets-list li h6.dense {
+	color: #FF0000;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.planets-list li:hover {
+	background-color: #eee; 
+}
