@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef} from 'react';
 import "./Search.css";
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import Planet from '../../components/Planet/Planet';
 
 const Search = (props) => {
 
@@ -73,13 +74,9 @@ const Search = (props) => {
 		
 	}
 
-
 	const planetsList = planetInfo.map((planetData,index)=>{
 		return (
-			<li key={index + planetData.name}>
-				<h4>Name: {planetData.name}</h4>
-				<h6 className={planetData.population > 2000000 ? "dense" : ((planetData.population === "unknown" || planetData.population  < 20000) ? null : "light")}>Population: {planetData.population}</h6>
-			</li>
+			<Planet key={index + planetData.name} name={planetData.name} population={planetData.population} />
 		)
 	});
 

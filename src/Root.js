@@ -1,8 +1,8 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
-import Login from "./components/Login/Login";
-import Search from "./components/Search/Search";
+import Login from "./container/Login/Login";
+import Search from "./container/Search/Search";
 
 class Root extends React.Component{
 
